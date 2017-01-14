@@ -67,7 +67,7 @@ import net.sf.jsqlparser.statement.select.SubSelect;
  * Minimal implementation for {@link ExpressionVisitor} who add values to {@link List} parameter.
  * <p>
  * Throw an {@link UnsupportedOperationException} if {@link Expression} is not supported.
- * 
+ *
  * @see ExpressionVisitor
  */
 public class MinimalAppenderExpressionVisitor implements ExpressionVisitor {
@@ -75,178 +75,13 @@ public class MinimalAppenderExpressionVisitor implements ExpressionVisitor {
     /** Contains each value of statement. */
     private final List<Object> values;
 
-    /** @see #values */
+    /** @param values The {@link #values}. */
     public MinimalAppenderExpressionVisitor(List<Object> values) {
         this.values = values;
     }
 
     @Override
-    public void visit(NullValue nullValue) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(Function function) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(SignedExpression signedExpression) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(JdbcParameter jdbcParameter) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(JdbcNamedParameter jdbcNamedParameter) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(DoubleValue doubleValue) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(LongValue longValue) {
-        values.add(longValue.getValue());
-    }
-
-    @Override
-    public void visit(HexValue hexValue) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(DateValue dateValue) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(TimeValue timeValue) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(TimestampValue timestampValue) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(Parenthesis parenthesis) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(StringValue stringValue) {
-        values.add(stringValue.getValue());
-    }
-
-    @Override
     public void visit(Addition addition) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(Division division) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(Multiplication multiplication) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(Subtraction subtraction) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(AndExpression andExpression) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(OrExpression orExpression) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(Between between) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(EqualsTo equalsTo) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(GreaterThan greaterThan) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(GreaterThanEquals greaterThanEquals) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(InExpression inExpression) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(IsNullExpression isNullExpression) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(LikeExpression likeExpression) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(MinorThan minorThan) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(MinorThanEquals minorThanEquals) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(NotEqualsTo notEqualsTo) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(net.sf.jsqlparser.schema.Column tableColumn) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(SubSelect subSelect) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(CaseExpression caseExpression) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(WhenClause whenClause) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(ExistsExpression existsExpression) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
@@ -256,17 +91,22 @@ public class MinimalAppenderExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public void visit(AnalyticExpression aexpr) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(AndExpression andExpression) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
     public void visit(AnyComparisonExpression anyComparisonExpression) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
     @Override
-    public void visit(Concat concat) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(Matches matches) {
+    public void visit(Between between) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
@@ -286,22 +126,47 @@ public class MinimalAppenderExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public void visit(CaseExpression caseExpression) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
     public void visit(CastExpression cast) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
     @Override
-    public void visit(Modulo modulo) {
+    public void visit(Concat concat) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
     @Override
-    public void visit(AnalyticExpression aexpr) {
+    public void visit(DateTimeLiteralExpression literal) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
     @Override
-    public void visit(WithinGroupExpression wgexpr) {
+    public void visit(DateValue dateValue) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(Division division) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(DoubleValue doubleValue) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(EqualsTo equalsTo) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(ExistsExpression existsExpression) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
@@ -311,17 +176,47 @@ public class MinimalAppenderExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public void visit(Function function) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(GreaterThan greaterThan) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(GreaterThanEquals greaterThanEquals) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(HexValue hexValue) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(InExpression inExpression) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
     public void visit(IntervalExpression iexpr) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
     @Override
-    public void visit(OracleHierarchicalExpression oexpr) {
+    public void visit(IsNullExpression isNullExpression) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
     @Override
-    public void visit(RegExpMatchOperator rexpr) {
+    public void visit(JdbcNamedParameter jdbcNamedParameter) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(JdbcParameter jdbcParameter) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
@@ -331,22 +226,42 @@ public class MinimalAppenderExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
-    public void visit(RegExpMySQLOperator regExpMySQLOperator) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(UserVariable var) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
-    public void visit(NumericBind bind) {
-        throw new UnsupportedOperationException("Not implemented, or not supported.");
-    }
-
-    @Override
     public void visit(KeepExpression aexpr) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(LikeExpression likeExpression) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(LongValue longValue) {
+        values.add(longValue.getValue());
+    }
+
+    @Override
+    public void visit(Matches matches) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(MinorThan minorThan) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(MinorThanEquals minorThanEquals) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(Modulo modulo) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(Multiplication multiplication) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
@@ -356,7 +271,27 @@ public class MinimalAppenderExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
-    public void visit(RowConstructor rowConstructor) {
+    public void visit(net.sf.jsqlparser.schema.Column tableColumn) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(NotEqualsTo notEqualsTo) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(NullValue nullValue) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(NumericBind bind) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(OracleHierarchicalExpression oexpr) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
@@ -366,12 +301,77 @@ public class MinimalAppenderExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public void visit(OrExpression orExpression) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(Parenthesis parenthesis) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(RegExpMatchOperator rexpr) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(RegExpMySQLOperator regExpMySQLOperator) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(RowConstructor rowConstructor) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(SignedExpression signedExpression) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(StringValue stringValue) {
+        values.add(stringValue.getValue());
+    }
+
+    @Override
+    public void visit(SubSelect subSelect) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(Subtraction subtraction) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
     public void visit(TimeKeyExpression timeKeyExpression) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
     @Override
-    public void visit(DateTimeLiteralExpression literal) {
+    public void visit(TimestampValue timestampValue) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(TimeValue timeValue) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(UserVariable var) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(WhenClause whenClause) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(WithinGroupExpression wgexpr) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 

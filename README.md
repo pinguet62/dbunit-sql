@@ -1,6 +1,12 @@
 # DbUnit SQL
 
-SQL support for [DbUnit](http://dbunit.sourceforge.net) and [spring-test-dbunit](https://springtestdbunit.github.io/spring-test-dbunit) extension for *Spring test*.
+[![Dependency Status](https://www.versioneye.com/user/projects/587a72a2de66c8004cdac018/badge.svg?style=flat)](https://www.versioneye.com/user/projects/587a72a2de66c8004cdac018)
+[![Build Status](https://travis-ci.org/pinguet62/dbunit-sql.svg?branch=master)](https://travis-ci.org/pinguet62/dbunit-sql)
+[![codecov.io](https://codecov.io/github/pinguet62/dbunit-sql/coverage.svg?branch=master)](https://codecov.io/github/pinguet62/dbunit-sql?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/pinguet62/dbunit-sql/badge.svg?branch=master)](https://coveralls.io/github/pinguet62/dbunit-sql?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/dbunit-sql/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/dbunit-sql)
+
+SQL dataset support for [DbUnit](http://dbunit.sourceforge.net) and [spring-test-dbunit](https://springtestdbunit.github.io/spring-test-dbunit) extension for *Spring test*.
 
 ## Description
 
