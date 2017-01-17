@@ -3,5 +3,8 @@
 language: java
 jdk: oraclejdk8
 
-install: # Default: `mvn test -B`
-    - mvn -B verify
+after_success: # Reports
+    # https://coveralls.io/github/pinguet62/dbunit-sql
+    - mvn jacoco:report coveralls:report
+    # https://codecov.io/gh/pinguet62/dbunit-sql
+    - bash <(curl -s https://codecov.io/bash)
