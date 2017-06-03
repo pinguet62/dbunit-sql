@@ -31,10 +31,10 @@ Are equivalents:
 
 ## Dependencies
 
-To use SQL support, ad this dependency to your `pom.xml`:
+To use SQL support, add this dependency to your `pom.xml`:
 ```xml
 <dependency>
-	<groupId>com.github.pinguet62</groupId>
+	<groupId>fr.pinguet62</groupId>
 	<artifactId>dbunit-sql</artifactId>
 	<version>...</version>
 </dependency>
