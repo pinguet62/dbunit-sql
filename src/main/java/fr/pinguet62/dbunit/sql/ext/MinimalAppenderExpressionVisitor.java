@@ -22,6 +22,7 @@ import net.sf.jsqlparser.expression.JsonExpression;
 import net.sf.jsqlparser.expression.KeepExpression;
 import net.sf.jsqlparser.expression.LongValue;
 import net.sf.jsqlparser.expression.MySQLGroupConcat;
+import net.sf.jsqlparser.expression.NotExpression;
 import net.sf.jsqlparser.expression.NullValue;
 import net.sf.jsqlparser.expression.NumericBind;
 import net.sf.jsqlparser.expression.OracleHierarchicalExpression;
@@ -54,6 +55,7 @@ import net.sf.jsqlparser.expression.operators.relational.GreaterThan;
 import net.sf.jsqlparser.expression.operators.relational.GreaterThanEquals;
 import net.sf.jsqlparser.expression.operators.relational.InExpression;
 import net.sf.jsqlparser.expression.operators.relational.IsNullExpression;
+import net.sf.jsqlparser.expression.operators.relational.JsonOperator;
 import net.sf.jsqlparser.expression.operators.relational.LikeExpression;
 import net.sf.jsqlparser.expression.operators.relational.Matches;
 import net.sf.jsqlparser.expression.operators.relational.MinorThan;
@@ -226,6 +228,11 @@ public class MinimalAppenderExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public void visit(JsonOperator jsonExpr) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
     public void visit(KeepExpression aexpr) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
@@ -277,6 +284,11 @@ public class MinimalAppenderExpressionVisitor implements ExpressionVisitor {
 
     @Override
     public void visit(NotEqualsTo notEqualsTo) {
+        throw new UnsupportedOperationException("Not implemented, or not supported.");
+    }
+
+    @Override
+    public void visit(NotExpression aThis) {
         throw new UnsupportedOperationException("Not implemented, or not supported.");
     }
 
