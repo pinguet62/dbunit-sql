@@ -10,7 +10,6 @@ import org.dbunit.dataset.stream.IDataSetProducer;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fr.pinguet62.dbunit.sql.ext.dbunitapi.UnsupportedExpressionVisitor;
 import net.sf.jsqlparser.expression.ExpressionVisitor;
 
 /** @see SqlDataSetProducer */

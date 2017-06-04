@@ -2,16 +2,29 @@ package fr.pinguet62.dbunit.sql.ext;
 
 import java.util.List;
 
-import fr.pinguet62.dbunit.sql.ext.dbunitapi.UnsupportedItemsListVisitor;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
+import net.sf.jsqlparser.expression.operators.relational.ItemsList;
+import net.sf.jsqlparser.expression.operators.relational.ItemsListVisitor;
+import net.sf.jsqlparser.expression.operators.relational.MultiExpressionList;
+import net.sf.jsqlparser.statement.select.SubSelect;
 
-public class SupportedItemsListVisitor extends UnsupportedItemsListVisitor {
+/**
+ * {@link ItemsListVisitor} with only supported {@link ItemsList}.
+ * <p>
+ * Supported {@link ItemsList} call {@link SupportedExpressionVisitor} to input parameter.<br>
+ * Unsupported {@link ItemsList} throw an {@link UnsupportedOperationException}.
+ */
+public class SupportedItemsListVisitor implements ItemsListVisitor {
 
     private final List<Object> values;
 
     public SupportedItemsListVisitor(List<Object> values) {
         this.values = values;
+    }
+
+    protected void notSupported(ItemsList itemsList) {
+        throw new UnsupportedOperationException(itemsList.getClass().toString());
     }
 
     @Override
@@ -20,6 +33,16 @@ public class SupportedItemsListVisitor extends UnsupportedItemsListVisitor {
             SupportedExpressionVisitor expressionDeParser = new SupportedExpressionVisitor(values);
             expression.accept(expressionDeParser);
         }
+    }
+
+    @Override
+    public void visit(MultiExpressionList multiExprList) {
+        notSupported(multiExprList);
+    }
+
+    @Override
+    public void visit(SubSelect subSelect) {
+        notSupported(subSelect);
     }
 
 }
