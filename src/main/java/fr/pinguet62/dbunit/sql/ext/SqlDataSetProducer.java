@@ -12,31 +12,21 @@ import org.dbunit.dataset.stream.IDataSetConsumer;
 import org.dbunit.dataset.stream.IDataSetProducer;
 
 import net.sf.jsqlparser.JSQLParserException;
-import net.sf.jsqlparser.expression.Expression;
-import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.expression.operators.relational.ItemsList;
-import net.sf.jsqlparser.expression.operators.relational.ItemsListVisitor;
-import net.sf.jsqlparser.expression.operators.relational.MultiExpressionList;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.Statements;
 import net.sf.jsqlparser.statement.insert.Insert;
-import net.sf.jsqlparser.statement.select.SubSelect;
 
 /** {@link IDataSetProducer} who <b>parse SQL script</b> and initializes table/columns/values for DbUnit. */
 public class SqlDataSetProducer implements IDataSetProducer {
 
-    private final String script;
-
     private IDataSetConsumer consumer;
+
+    private final String script;
 
     public SqlDataSetProducer(String script) {
         this.script = script;
-    }
-
-    @Override
-    public void setConsumer(IDataSetConsumer consumer) throws DataSetException {
-        this.consumer = consumer;
     }
 
     @Override
@@ -74,25 +64,7 @@ public class SqlDataSetProducer implements IDataSetProducer {
             // Value
             ItemsList itemsList = insert.getItemsList();
             final List<Object> tmpItems = new ArrayList<>();
-            itemsList.accept(new ItemsListVisitor() {
-                @Override
-                public void visit(SubSelect subSelect) {
-                    throw new UnsupportedOperationException("Value must be hard-coded:" + subSelect);
-                }
-
-                @Override
-                public void visit(ExpressionList expressionList) {
-                    for (Expression expression : expressionList.getExpressions()) {
-                        MinimalAppenderExpressionVisitor expressionDeParser = new MinimalAppenderExpressionVisitor(tmpItems);
-                        expression.accept(expressionDeParser);
-                    }
-                }
-
-                @Override
-                public void visit(MultiExpressionList multiExprList) {
-                    throw new UnsupportedOperationException("Value must be hard-coded: " + multiExprList);
-                }
-            });
+            itemsList.accept(new SupportedItemsListVisitor(tmpItems));
             Object[] row = tmpItems.toArray();
             consumer.row(row);
 
@@ -100,6 +72,11 @@ public class SqlDataSetProducer implements IDataSetProducer {
         }
 
         consumer.endDataSet();
+    }
+
+    @Override
+    public void setConsumer(IDataSetConsumer consumer) throws DataSetException {
+        this.consumer = consumer;
     }
 
 }
