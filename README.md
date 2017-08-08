@@ -6,6 +6,7 @@
 [![codecov.io](https://codecov.io/github/pinguet62/dbunit-sql/coverage.svg?branch=master)](https://codecov.io/github/pinguet62/dbunit-sql?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/pinguet62/dbunit-sql/badge.svg?branch=master)](https://coveralls.io/github/pinguet62/dbunit-sql?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/dbunit-sql/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/dbunit-sql)
+[![Javadocs](https://www.javadoc.io/badge/fr.pinguet62/dbunit-sql.svg)](https://www.javadoc.io/doc/fr.pinguet62/dbunit-sql)
 
 SQL dataset support for [DbUnit](http://dbunit.sourceforge.net) and [spring-test-dbunit](https://springtestdbunit.github.io/spring-test-dbunit) extension for *Spring test*.
 
