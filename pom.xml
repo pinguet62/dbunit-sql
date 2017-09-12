@@ -4,7 +4,7 @@
 
 	<groupId>fr.pinguet62</groupId>
 	<artifactId>dbunit-sql</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>DbUnit SQL</name>
@@ -175,7 +175,7 @@
 		<url>https://github.com/pinguet62/dbunit-sql</url>
 		<connection>scm:git:git@github.com:pinguet62/dbunit-sql.git</connection>
 		<developerConnection>scm:git:git@github.com:pinguet62/dbunit-sql.git</developerConnection>
-		<tag>1.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>
