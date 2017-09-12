@@ -1,15 +1,13 @@
-# https://travis-ci.org/pinguet62/dbunit-sql
-
 language: java
 jdk: oraclejdk8
 
+script: # override default "mvn test -B"
+    - mvn clean install -B
+
 after_success:
-    # Reports
-    # https://coveralls.io/github/pinguet62/dbunit-sql
-    - mvn jacoco:report coveralls:report
-    # https://codecov.io/gh/pinguet62/dbunit-sql
-    - bash <(curl -s https://codecov.io/bash)
+    # Code coverage: report
+    - bash <(curl -s https://codecov.io/bash) # CodeCov
     
-    # Deploy SNAPSHOT
+    # Deploy: SNAPSHOT
     - echo '<settings><servers><server><id>ossrh</id><username>${env.OSSRH_USER}</username><password>${env.OSSRH_PASS}</password></server></servers></settings>' > deploy-settings.xml
     - "[[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests -Dgpg.skip --settings deploy-settings.xml"

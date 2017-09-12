@@ -5,7 +5,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f47a566d60f549c38b4ac4e72e06183d)](https://www.codacy.com/app/pinguet62/dbunit-sql?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pinguet62/dbunit-sql&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/pinguet62/dbunit-sql.svg?branch=master)](https://travis-ci.org/pinguet62/dbunit-sql)
 [![codecov.io](https://codecov.io/github/pinguet62/dbunit-sql/coverage.svg?branch=master)](https://codecov.io/github/pinguet62/dbunit-sql?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/pinguet62/dbunit-sql/badge.svg?branch=master)](https://coveralls.io/github/pinguet62/dbunit-sql?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/dbunit-sql/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/dbunit-sql)
 [![Javadocs](https://www.javadoc.io/badge/fr.pinguet62/dbunit-sql.svg)](https://www.javadoc.io/doc/fr.pinguet62/dbunit-sql)
 
