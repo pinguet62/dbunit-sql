@@ -1,5 +1,6 @@
 # DbUnit SQL
 
+![Maintained](https://img.shields.io/badge/maintained%3F-yes-brightgreen.svg?style=flat)
 [![Dependency Status](https://www.versioneye.com/user/projects/587a72a2de66c8004cdac018/badge.svg?style=flat)](https://www.versioneye.com/user/projects/587a72a2de66c8004cdac018)
 [![Known Vulnerabilities](https://snyk.io/test/github/pinguet62/dbunit-sql/badge.svg)](https://snyk.io/test/github/pinguet62/dbunit-sql)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f47a566d60f549c38b4ac4e72e06183d)](https://www.codacy.com/app/pinguet62/dbunit-sql?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pinguet62/dbunit-sql&amp;utm_campaign=Badge_Grade)
