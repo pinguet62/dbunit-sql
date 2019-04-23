@@ -1,12 +1,11 @@
 package fr.pinguet62.dbunit.sql.ext;
 
-import java.util.List;
-
 import net.sf.jsqlparser.expression.AllComparisonExpression;
 import net.sf.jsqlparser.expression.AnalyticExpression;
 import net.sf.jsqlparser.expression.AnyComparisonExpression;
 import net.sf.jsqlparser.expression.CaseExpression;
 import net.sf.jsqlparser.expression.CastExpression;
+import net.sf.jsqlparser.expression.CollateExpression;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 import net.sf.jsqlparser.expression.DateValue;
 import net.sf.jsqlparser.expression.DoubleValue;
@@ -22,6 +21,7 @@ import net.sf.jsqlparser.expression.JsonExpression;
 import net.sf.jsqlparser.expression.KeepExpression;
 import net.sf.jsqlparser.expression.LongValue;
 import net.sf.jsqlparser.expression.MySQLGroupConcat;
+import net.sf.jsqlparser.expression.NextValExpression;
 import net.sf.jsqlparser.expression.NotExpression;
 import net.sf.jsqlparser.expression.NullValue;
 import net.sf.jsqlparser.expression.NumericBind;
@@ -35,11 +35,13 @@ import net.sf.jsqlparser.expression.TimeKeyExpression;
 import net.sf.jsqlparser.expression.TimeValue;
 import net.sf.jsqlparser.expression.TimestampValue;
 import net.sf.jsqlparser.expression.UserVariable;
+import net.sf.jsqlparser.expression.ValueListExpression;
 import net.sf.jsqlparser.expression.WhenClause;
-import net.sf.jsqlparser.expression.WithinGroupExpression;
 import net.sf.jsqlparser.expression.operators.arithmetic.Addition;
 import net.sf.jsqlparser.expression.operators.arithmetic.BitwiseAnd;
+import net.sf.jsqlparser.expression.operators.arithmetic.BitwiseLeftShift;
 import net.sf.jsqlparser.expression.operators.arithmetic.BitwiseOr;
+import net.sf.jsqlparser.expression.operators.arithmetic.BitwiseRightShift;
 import net.sf.jsqlparser.expression.operators.arithmetic.BitwiseXor;
 import net.sf.jsqlparser.expression.operators.arithmetic.Concat;
 import net.sf.jsqlparser.expression.operators.arithmetic.Division;
@@ -66,6 +68,8 @@ import net.sf.jsqlparser.expression.operators.relational.RegExpMySQLOperator;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.select.SubSelect;
 
+import java.util.List;
+
 /**
  * {@link ExpressionVisitor} with only supported {@link Expression}.
  * <p>
@@ -74,19 +78,26 @@ import net.sf.jsqlparser.statement.select.SubSelect;
  */
 public class SupportedExpressionVisitor implements ExpressionVisitor {
 
-    /** Contains each value of statement. */
+    /**
+     * Contains each value of statement.
+     */
     private final List<Object> values;
 
     /**
-     * @param values
-     *            The {@link #values}.
+     * @param values The {@link #values}.
      */
     public SupportedExpressionVisitor(List<Object> values) {
         this.values = values;
     }
 
-    protected void notSupported(Expression expression) {
-        throw new UnsupportedOperationException(expression.getClass().toString());
+    @Override
+    public void visit(StringValue stringValue) {
+        values.add(stringValue.getValue());
+    }
+
+    @Override
+    public void visit(LongValue longValue) {
+        values.add(longValue.getValue());
     }
 
     @Override
@@ -255,11 +266,6 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
-    public void visit(LongValue longValue) {
-        values.add(longValue.getValue());
-    }
-
-    @Override
     public void visit(Matches matches) {
         notSupported(matches);
     }
@@ -290,12 +296,37 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public void visit(ValueListExpression valueList) {
+        notSupported(valueList);
+    }
+
+    @Override
     public void visit(NotEqualsTo notEqualsTo) {
         notSupported(notEqualsTo);
     }
 
     @Override
     public void visit(NotExpression aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(NextValExpression aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(CollateExpression aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(BitwiseRightShift aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(BitwiseLeftShift aThis) {
         notSupported(aThis);
     }
 
@@ -350,11 +381,6 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
-    public void visit(StringValue stringValue) {
-        values.add(stringValue.getValue());
-    }
-
-    @Override
     public void visit(SubSelect subSelect) {
         notSupported(subSelect);
     }
@@ -389,9 +415,8 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
         notSupported(whenClause);
     }
 
-    @Override
-    public void visit(WithinGroupExpression wgexpr) {
-        notSupported(wgexpr);
+    private void notSupported(Expression expression) {
+        throw new UnsupportedOperationException(expression.getClass().toString());
     }
 
 }

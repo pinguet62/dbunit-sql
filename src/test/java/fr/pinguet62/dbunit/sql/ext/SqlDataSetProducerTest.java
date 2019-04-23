@@ -1,8 +1,6 @@
 package fr.pinguet62.dbunit.sql.ext;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
+import net.sf.jsqlparser.expression.ExpressionVisitor;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.ITableMetaData;
 import org.dbunit.dataset.stream.IDataSetConsumer;
@@ -10,9 +8,12 @@ import org.dbunit.dataset.stream.IDataSetProducer;
 import org.junit.Assert;
 import org.junit.Test;
 
-import net.sf.jsqlparser.expression.ExpressionVisitor;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-/** @see SqlDataSetProducer */
+/**
+ * @see SqlDataSetProducer
+ */
 public class SqlDataSetProducerTest {
 
     /**
@@ -59,7 +60,7 @@ public class SqlDataSetProducerTest {
     public void test_missingKey() {
         run("insert into profile (id) values ('1st', 'first');", new IDataSetConsumerAdapter() {
             @Override
-            public void row(Object[] values) throws DataSetException {
+            public void row(Object[] values) {
                 assertEquals(2, values.length);
                 assertEquals("1st", values[0]);
                 assertEquals("first", values[1]);
@@ -82,7 +83,7 @@ public class SqlDataSetProducerTest {
     public void test_missingValue() {
         run("insert into profile (id, key) values ('1st');", new IDataSetConsumerAdapter() {
             @Override
-            public void row(Object[] values) throws DataSetException {
+            public void row(Object[] values) {
                 assertEquals(1, values.length);
                 assertEquals("1st", values[0]);
             }

@@ -1,13 +1,9 @@
 package fr.pinguet62.dbunit.sql.spring;
 
-import static java.util.Arrays.asList;
-import static org.junit.Assert.assertTrue;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
+import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DbUnitConfiguration;
+import fr.pinguet62.dbunit.sql.springtest.SqlDataSetLoader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +12,17 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
-import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.DbUnitConfiguration;
+import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import fr.pinguet62.dbunit.sql.springtest.SqlDataSetLoader;
+import static java.util.Arrays.asList;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = DatabaseConfig.class)
 // DbUnit
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class })
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class})
 @DbUnitConfiguration(dataSetLoader = SqlDataSetLoader.class)
 @DatabaseSetup("/dataset.sql")
 public class IntegrationTest {

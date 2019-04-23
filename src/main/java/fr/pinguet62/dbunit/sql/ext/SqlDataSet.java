@@ -1,21 +1,21 @@
 package fr.pinguet62.dbunit.sql.ext;
 
-import static java.nio.charset.Charset.defaultCharset;
-
-import java.io.IOException;
-import java.io.InputStream;
-
 import org.apache.commons.io.IOUtils;
 import org.dbunit.dataset.CachedDataSet;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.stream.IDataSetProducer;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import static java.nio.charset.Charset.defaultCharset;
+
 /**
  * {@link IDataSet} for SQL script file.
  * <p>
  * Use {@link IDataSetProducer} to read input data.
- * 
+ *
  * @see SqlDataSetProducer
  */
 public class SqlDataSet extends CachedDataSet {

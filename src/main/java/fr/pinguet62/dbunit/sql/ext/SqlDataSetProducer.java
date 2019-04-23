@@ -1,8 +1,11 @@
 package fr.pinguet62.dbunit.sql.ext;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import net.sf.jsqlparser.JSQLParserException;
+import net.sf.jsqlparser.expression.operators.relational.ItemsList;
+import net.sf.jsqlparser.parser.CCJSqlParserUtil;
+import net.sf.jsqlparser.statement.Statement;
+import net.sf.jsqlparser.statement.Statements;
+import net.sf.jsqlparser.statement.insert.Insert;
 import org.dbunit.dataset.Column;
 import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.DefaultTableMetaData;
@@ -11,14 +14,12 @@ import org.dbunit.dataset.datatype.DataType;
 import org.dbunit.dataset.stream.IDataSetConsumer;
 import org.dbunit.dataset.stream.IDataSetProducer;
 
-import net.sf.jsqlparser.JSQLParserException;
-import net.sf.jsqlparser.expression.operators.relational.ItemsList;
-import net.sf.jsqlparser.parser.CCJSqlParserUtil;
-import net.sf.jsqlparser.statement.Statement;
-import net.sf.jsqlparser.statement.Statements;
-import net.sf.jsqlparser.statement.insert.Insert;
+import java.util.ArrayList;
+import java.util.List;
 
-/** {@link IDataSetProducer} who <b>parse SQL script</b> and initializes table/columns/values for DbUnit. */
+/**
+ * {@link IDataSetProducer} who <b>parse SQL script</b> and initializes table/columns/values for DbUnit.
+ */
 public class SqlDataSetProducer implements IDataSetProducer {
 
     private IDataSetConsumer consumer;
@@ -75,7 +76,7 @@ public class SqlDataSetProducer implements IDataSetProducer {
     }
 
     @Override
-    public void setConsumer(IDataSetConsumer consumer) throws DataSetException {
+    public void setConsumer(IDataSetConsumer consumer) {
         this.consumer = consumer;
     }
 

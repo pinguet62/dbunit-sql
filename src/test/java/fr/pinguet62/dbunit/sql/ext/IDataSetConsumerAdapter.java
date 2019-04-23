@@ -7,19 +7,19 @@ import org.dbunit.dataset.stream.IDataSetConsumer;
 public class IDataSetConsumerAdapter implements IDataSetConsumer {
 
     @Override
-    public void endDataSet() throws DataSetException {
+    public void endDataSet() {
     }
 
     @Override
-    public void endTable() throws DataSetException {
+    public void endTable() {
     }
 
     @Override
-    public void row(Object[] values) throws DataSetException {
+    public void row(Object[] values) {
     }
 
     @Override
-    public void startDataSet() throws DataSetException {
+    public void startDataSet() {
     }
 
     @Override

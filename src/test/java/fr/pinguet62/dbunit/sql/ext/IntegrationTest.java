@@ -1,15 +1,5 @@
 package fr.pinguet62.dbunit.sql.ext;
 
-import static java.nio.charset.Charset.defaultCharset;
-import static java.util.Arrays.asList;
-import static org.dbunit.PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL;
-import static org.dbunit.PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS;
-import static org.dbunit.PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD;
-import static org.dbunit.PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.apache.commons.io.IOUtils;
 import org.dbunit.DBTestCase;
 import org.dbunit.DatabaseTestCase;
@@ -20,17 +10,31 @@ import org.dbunit.operation.CompositeOperation;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.Test;
 
-/** Real test case based on {@link DBTestCase}. */
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import static java.nio.charset.Charset.defaultCharset;
+import static java.util.Arrays.asList;
+import static org.dbunit.PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL;
+import static org.dbunit.PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS;
+import static org.dbunit.PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD;
+import static org.dbunit.PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME;
+
+/**
+ * Real test case based on {@link DBTestCase}.
+ */
 public class IntegrationTest extends DBTestCase {
 
     public IntegrationTest() {
         System.setProperty(DBUNIT_DRIVER_CLASS, "org.hsqldb.jdbcDriver");
-        System.setProperty(DBUNIT_CONNECTION_URL, "jdbc:hsqldb:test");
+        System.setProperty(DBUNIT_CONNECTION_URL, "jdbc:hsqldb:mem:test");
         System.setProperty(DBUNIT_USERNAME, "sa");
         System.setProperty(DBUNIT_PASSWORD, "");
     }
 
-    /** Add <b>DDL creation</b> operation before {@link DatabaseTestCase#getSetUpOperation() default}. */
+    /**
+     * Add <b>DDL creation</b> operation before {@link DatabaseTestCase#getSetUpOperation() default}.
+     */
     @Override
     protected DatabaseOperation getSetUpOperation() throws Exception {
         DatabaseOperation ddlOperation = new DatabaseOperation() {
@@ -53,7 +57,7 @@ public class IntegrationTest extends DBTestCase {
     }
 
     @Test
-    public void test() throws SQLException, Exception {
+    public void test() throws Exception {
         ResultSet profileRS = getConnection().getConnection().createStatement().executeQuery("SELECT * FROM profile ORDER BY id");
         while (profileRS.next()) {
             assertTrue(asList("1st", "2nd").contains(profileRS.getString("id")));
