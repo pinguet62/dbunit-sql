@@ -1,12 +1,16 @@
 # DbUnit SQL
 
-![Maintained](https://img.shields.io/badge/maintained%3F-yes-brightgreen.svg?style=flat)
-[![Dependency Status](https://www.versioneye.com/user/projects/587a72a2de66c8004cdac018/badge.svg?style=flat)](https://www.versioneye.com/user/projects/587a72a2de66c8004cdac018)
-[![Known Vulnerabilities](https://snyk.io/test/github/pinguet62/dbunit-sql/badge.svg)](https://snyk.io/test/github/pinguet62/dbunit-sql)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f47a566d60f549c38b4ac4e72e06183d)](https://www.codacy.com/app/pinguet62/dbunit-sql?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pinguet62/dbunit-sql&amp;utm_campaign=Badge_Grade)
-[![Build Status](https://travis-ci.org/pinguet62/dbunit-sql.svg?branch=master)](https://travis-ci.org/pinguet62/dbunit-sql)
-[![codecov.io](https://codecov.io/github/pinguet62/dbunit-sql/coverage.svg?branch=master)](https://codecov.io/github/pinguet62/dbunit-sql?branch=master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/dbunit-sql/badge.svg)](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/dbunit-sql)
+[![Maintained](https://img.shields.io/badge/maintained%3F-yes-brightgreen.svg?style=flat)](https://github.com/pinguet62)
+
+[![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/pinguet62/dbunit-sql)](https://libraries.io/github/pinguet62/dbunit-sql)
+[![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/pinguet62/dbunit-sql)](https://snyk.io/test/github/pinguet62/dbunit-sql)
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f47a566d60f549c38b4ac4e72e06183d)](https://www.codacy.com/manual/pinguet62/dbunit-sql?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pinguet62/dbunit-sql&amp;utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/pinguet62/dbunit-sql/branch/master/graph/badge.svg)](https://codecov.io/gh/pinguet62/dbunit-sql)
+
+[![GitHub Actions](https://github.com/pinguet62/dbunit-sql/workflows/CI/badge.svg?branch=master)](https://github.com/pinguet62/dbunit-sql/actions?query=workflow%3ACI+branch%3Amaster)
+
+[![Maven Central](https://img.shields.io/maven-central/v/fr.pinguet62/dbunit-sql)](https://maven-badges.herokuapp.com/maven-central/fr.pinguet62/dbunit-sql)
 [![Javadocs](https://www.javadoc.io/badge/fr.pinguet62/dbunit-sql.svg)](https://www.javadoc.io/doc/fr.pinguet62/dbunit-sql)
 
 SQL dataset support for [DbUnit](http://dbunit.sourceforge.net) and [spring-test-dbunit](https://springtestdbunit.github.io/spring-test-dbunit) extension for *Spring test*.
