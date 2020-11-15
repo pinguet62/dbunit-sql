@@ -5,7 +5,7 @@
 Just follow **usual best practices**:
 * *Explain* fix or feature into *pull request*
 * Implementation:
-    * branch from `master`
+    * branch from `main`
     * produce *beautiful* source code
     * *format* source code
 * Update:
