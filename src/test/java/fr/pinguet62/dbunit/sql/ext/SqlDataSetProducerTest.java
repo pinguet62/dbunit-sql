@@ -45,7 +45,7 @@ public class SqlDataSetProducerTest {
             producer.produce();
             fail("Must fail: " + script);
         } catch (DataSetException e) {
-            fail(e.getMessage());
+            throw new AssertionError(e);
         } catch (UnsupportedOperationException e) {
             // ok
         }
@@ -123,13 +123,12 @@ public class SqlDataSetProducerTest {
         runUnsupported("insert into profile (Concat) values ('foo' || 'bar');");
         runUnsupported("insert into profile (Division) values (1 / 2);");
         runUnsupported("insert into profile (DoubleValue) values (1.23);");
-        runUnsupported("insert into profile (Function) values (FCT());");
+        runUnsupported("insert into profile (_Function) values (FCT());");
         runUnsupported("insert into profile (HexValue) values (0x123);");
         runUnsupported("insert into profile (Modulo) values (1 % 2);");
         runUnsupported("insert into profile (Multiplication) values (1 * 2);");
         runUnsupported("insert into profile (NullValue) values (NULL);");
         runUnsupported("insert into profile (Substraction) values (1 - 2);");
-
     }
 
 }
