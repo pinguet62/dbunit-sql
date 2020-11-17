@@ -27,8 +27,8 @@ jobs:
       - name: Deploy SNAPSHOT
         if: github.ref == 'refs/heads/main'
         env:
-          OSSRH_USER: ${{ secrets.OSSRH_USER }}
-          OSSRH_PASS: ${{ secrets.OSSRH_PASS }}
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
         run: |
-          echo "<settings><servers><server><id>ossrh</id><username>${OSSRH_USER}</username><password>${OSSRH_PASS}</password></server></servers></settings>" > deploy-settings.xml
+          echo "<settings><servers><server><id>ossrh</id><username>${OSSRH_USERNAME}</username><password>${OSSRH_PASSWORD}</password></server></servers></settings>" > deploy-settings.xml
           mvn deploy -DskipTests -Dgpg.skip --settings deploy-settings.xml
