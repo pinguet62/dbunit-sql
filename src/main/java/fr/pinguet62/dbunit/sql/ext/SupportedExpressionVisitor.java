@@ -1,43 +1,6 @@
 package fr.pinguet62.dbunit.sql.ext;
 
-import net.sf.jsqlparser.expression.AllComparisonExpression;
-import net.sf.jsqlparser.expression.AnalyticExpression;
-import net.sf.jsqlparser.expression.AnyComparisonExpression;
-import net.sf.jsqlparser.expression.ArrayExpression;
-import net.sf.jsqlparser.expression.CaseExpression;
-import net.sf.jsqlparser.expression.CastExpression;
-import net.sf.jsqlparser.expression.CollateExpression;
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
-import net.sf.jsqlparser.expression.DateValue;
-import net.sf.jsqlparser.expression.DoubleValue;
-import net.sf.jsqlparser.expression.Expression;
-import net.sf.jsqlparser.expression.ExpressionVisitor;
-import net.sf.jsqlparser.expression.ExtractExpression;
-import net.sf.jsqlparser.expression.Function;
-import net.sf.jsqlparser.expression.HexValue;
-import net.sf.jsqlparser.expression.IntervalExpression;
-import net.sf.jsqlparser.expression.JdbcNamedParameter;
-import net.sf.jsqlparser.expression.JdbcParameter;
-import net.sf.jsqlparser.expression.JsonExpression;
-import net.sf.jsqlparser.expression.KeepExpression;
-import net.sf.jsqlparser.expression.LongValue;
-import net.sf.jsqlparser.expression.MySQLGroupConcat;
-import net.sf.jsqlparser.expression.NextValExpression;
-import net.sf.jsqlparser.expression.NotExpression;
-import net.sf.jsqlparser.expression.NullValue;
-import net.sf.jsqlparser.expression.NumericBind;
-import net.sf.jsqlparser.expression.OracleHierarchicalExpression;
-import net.sf.jsqlparser.expression.OracleHint;
-import net.sf.jsqlparser.expression.Parenthesis;
-import net.sf.jsqlparser.expression.RowConstructor;
-import net.sf.jsqlparser.expression.SignedExpression;
-import net.sf.jsqlparser.expression.StringValue;
-import net.sf.jsqlparser.expression.TimeKeyExpression;
-import net.sf.jsqlparser.expression.TimeValue;
-import net.sf.jsqlparser.expression.TimestampValue;
-import net.sf.jsqlparser.expression.UserVariable;
-import net.sf.jsqlparser.expression.ValueListExpression;
-import net.sf.jsqlparser.expression.WhenClause;
+import net.sf.jsqlparser.expression.*;
 import net.sf.jsqlparser.expression.operators.arithmetic.Addition;
 import net.sf.jsqlparser.expression.operators.arithmetic.BitwiseAnd;
 import net.sf.jsqlparser.expression.operators.arithmetic.BitwiseLeftShift;
@@ -52,6 +15,7 @@ import net.sf.jsqlparser.expression.operators.arithmetic.Multiplication;
 import net.sf.jsqlparser.expression.operators.arithmetic.Subtraction;
 import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
 import net.sf.jsqlparser.expression.operators.conditional.OrExpression;
+import net.sf.jsqlparser.expression.operators.conditional.XorExpression;
 import net.sf.jsqlparser.expression.operators.relational.Between;
 import net.sf.jsqlparser.expression.operators.relational.EqualsTo;
 import net.sf.jsqlparser.expression.operators.relational.ExistsExpression;
@@ -108,11 +72,6 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     @Override
     public void visit(Addition addition) {
         notSupported(addition);
-    }
-
-    @Override
-    public void visit(AllComparisonExpression allComparisonExpression) {
-        notSupported(allComparisonExpression);
     }
 
     @Override
@@ -351,6 +310,46 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public void visit(ArrayConstructor aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(VariableAssignment aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(XMLSerializeExpr aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(TimezoneExpression aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(JsonAggregateFunction aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(JsonFunction aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(ConnectByRootOperator aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(OracleNamedFunctionParameter aThis) {
+
+    }
+
+    @Override
     public void visit(BitwiseRightShift aThis) {
         notSupported(aThis);
     }
@@ -386,6 +385,11 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public void visit(XorExpression orExpression) {
+        notSupported(orExpression);
+    }
+
+    @Override
     public void visit(Parenthesis parenthesis) {
         notSupported(parenthesis);
     }
@@ -403,6 +407,11 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     @Override
     public void visit(RowConstructor rowConstructor) {
         notSupported(rowConstructor);
+    }
+
+    @Override
+    public void visit(RowGetExpression rowGetExpression) {
+        notSupported(rowGetExpression);
     }
 
     @Override

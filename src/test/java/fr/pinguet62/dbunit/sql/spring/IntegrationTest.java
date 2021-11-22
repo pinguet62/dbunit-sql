@@ -4,12 +4,12 @@ import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import fr.pinguet62.dbunit.sql.springtest.SqlDataSetLoader;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import javax.sql.DataSource;
@@ -17,21 +17,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = DatabaseConfig.class)
 // DbUnit
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class})
 @DbUnitConfiguration(dataSetLoader = SqlDataSetLoader.class)
 @DatabaseSetup("/dataset.sql")
-public class IntegrationTest {
+class IntegrationTest {
 
     @Autowired
-    private DataSource dataSource;
+    DataSource dataSource;
 
     @Test
-    public void test() throws SQLException {
+    void test() throws SQLException {
         ResultSet profileRS = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM profile ORDER BY id");
         while (profileRS.next()) {
             assertTrue(asList("1st", "2nd").contains(profileRS.getString("id")));

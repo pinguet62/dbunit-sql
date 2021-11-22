@@ -4,11 +4,12 @@ import org.apache.commons.io.IOUtils;
 import org.dbunit.DBTestCase;
 import org.dbunit.DatabaseTestCase;
 import org.dbunit.DatabaseUnitException;
+import org.dbunit.JUnit5DBTestCase;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.operation.CompositeOperation;
 import org.dbunit.operation.DatabaseOperation;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,11 +20,12 @@ import static org.dbunit.PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL
 import static org.dbunit.PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS;
 import static org.dbunit.PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD;
 import static org.dbunit.PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Real test case based on {@link DBTestCase}.
+ * Real test case based on {@link DBTestCase} like.
  */
-public class IntegrationTest extends DBTestCase {
+public class IntegrationTest extends JUnit5DBTestCase {
 
     public IntegrationTest() {
         System.setProperty(DBUNIT_DRIVER_CLASS, "org.hsqldb.jdbcDriver");

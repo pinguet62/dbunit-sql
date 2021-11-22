@@ -5,16 +5,16 @@ import org.dbunit.dataset.DataSetException;
 import org.dbunit.dataset.ITableMetaData;
 import org.dbunit.dataset.stream.IDataSetConsumer;
 import org.dbunit.dataset.stream.IDataSetProducer;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * @see SqlDataSetProducer
  */
-public class SqlDataSetProducerTest {
+class SqlDataSetProducerTest {
 
     /**
      * User {@link IDataSetConsumer} on {@link SqlDataSetProducer}'s consumer.<br>
@@ -80,7 +80,7 @@ public class SqlDataSetProducerTest {
      * @see SqlDataSetProducer#produce()
      */
     @Test
-    public void test_missingValue() {
+    void test_missingValue() {
         run("insert into profile (id, key) values ('1st');", new IDataSetConsumerAdapter() {
             @Override
             public void row(Object[] values) {
@@ -114,7 +114,7 @@ public class SqlDataSetProducerTest {
      * @see ExpressionVisitor#visit(net.sf.jsqlparser.expression.operators.arithmetic.Subtraction)
      */
     @Test
-    public void test_unsupported() {
+    void test_unsupported() {
         runUnsupported("insert into profile (Addition) values (1 + 2);");
         runUnsupported("insert into profile (BitwiseAnd) values (1 & 2);");
         runUnsupported("insert into profile (BitwiseOr) values (1 | 2);");
