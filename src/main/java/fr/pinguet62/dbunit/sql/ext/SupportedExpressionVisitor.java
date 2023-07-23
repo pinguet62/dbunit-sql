@@ -1,6 +1,55 @@
 package fr.pinguet62.dbunit.sql.ext;
 
-import net.sf.jsqlparser.expression.*;
+import net.sf.jsqlparser.expression.AllValue;
+import net.sf.jsqlparser.expression.AnalyticExpression;
+import net.sf.jsqlparser.expression.AnyComparisonExpression;
+import net.sf.jsqlparser.expression.ArrayConstructor;
+import net.sf.jsqlparser.expression.ArrayExpression;
+import net.sf.jsqlparser.expression.CaseExpression;
+import net.sf.jsqlparser.expression.CastExpression;
+import net.sf.jsqlparser.expression.CollateExpression;
+import net.sf.jsqlparser.expression.ConnectByRootOperator;
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
+import net.sf.jsqlparser.expression.DateValue;
+import net.sf.jsqlparser.expression.DoubleValue;
+import net.sf.jsqlparser.expression.Expression;
+import net.sf.jsqlparser.expression.ExpressionVisitor;
+import net.sf.jsqlparser.expression.ExtractExpression;
+import net.sf.jsqlparser.expression.Function;
+import net.sf.jsqlparser.expression.HexValue;
+import net.sf.jsqlparser.expression.IntervalExpression;
+import net.sf.jsqlparser.expression.JdbcNamedParameter;
+import net.sf.jsqlparser.expression.JdbcParameter;
+import net.sf.jsqlparser.expression.JsonAggregateFunction;
+import net.sf.jsqlparser.expression.JsonExpression;
+import net.sf.jsqlparser.expression.JsonFunction;
+import net.sf.jsqlparser.expression.KeepExpression;
+import net.sf.jsqlparser.expression.LongValue;
+import net.sf.jsqlparser.expression.MySQLGroupConcat;
+import net.sf.jsqlparser.expression.NextValExpression;
+import net.sf.jsqlparser.expression.NotExpression;
+import net.sf.jsqlparser.expression.NullValue;
+import net.sf.jsqlparser.expression.NumericBind;
+import net.sf.jsqlparser.expression.OracleHierarchicalExpression;
+import net.sf.jsqlparser.expression.OracleHint;
+import net.sf.jsqlparser.expression.OracleNamedFunctionParameter;
+import net.sf.jsqlparser.expression.OverlapsCondition;
+import net.sf.jsqlparser.expression.Parenthesis;
+import net.sf.jsqlparser.expression.RowConstructor;
+import net.sf.jsqlparser.expression.RowGetExpression;
+import net.sf.jsqlparser.expression.SafeCastExpression;
+import net.sf.jsqlparser.expression.SignedExpression;
+import net.sf.jsqlparser.expression.StringValue;
+import net.sf.jsqlparser.expression.TimeKeyExpression;
+import net.sf.jsqlparser.expression.TimeValue;
+import net.sf.jsqlparser.expression.TimestampValue;
+import net.sf.jsqlparser.expression.TimezoneExpression;
+import net.sf.jsqlparser.expression.TryCastExpression;
+import net.sf.jsqlparser.expression.UserVariable;
+import net.sf.jsqlparser.expression.ValueListExpression;
+import net.sf.jsqlparser.expression.VariableAssignment;
+import net.sf.jsqlparser.expression.WhenClause;
+import net.sf.jsqlparser.expression.XMLSerializeExpr;
 import net.sf.jsqlparser.expression.operators.arithmetic.Addition;
 import net.sf.jsqlparser.expression.operators.arithmetic.BitwiseAnd;
 import net.sf.jsqlparser.expression.operators.arithmetic.BitwiseLeftShift;
@@ -20,10 +69,12 @@ import net.sf.jsqlparser.expression.operators.relational.Between;
 import net.sf.jsqlparser.expression.operators.relational.EqualsTo;
 import net.sf.jsqlparser.expression.operators.relational.ExistsExpression;
 import net.sf.jsqlparser.expression.operators.relational.FullTextSearch;
+import net.sf.jsqlparser.expression.operators.relational.GeometryDistance;
 import net.sf.jsqlparser.expression.operators.relational.GreaterThan;
 import net.sf.jsqlparser.expression.operators.relational.GreaterThanEquals;
 import net.sf.jsqlparser.expression.operators.relational.InExpression;
 import net.sf.jsqlparser.expression.operators.relational.IsBooleanExpression;
+import net.sf.jsqlparser.expression.operators.relational.IsDistinctExpression;
 import net.sf.jsqlparser.expression.operators.relational.IsNullExpression;
 import net.sf.jsqlparser.expression.operators.relational.JsonOperator;
 import net.sf.jsqlparser.expression.operators.relational.LikeExpression;
@@ -35,6 +86,8 @@ import net.sf.jsqlparser.expression.operators.relational.RegExpMatchOperator;
 import net.sf.jsqlparser.expression.operators.relational.RegExpMySQLOperator;
 import net.sf.jsqlparser.expression.operators.relational.SimilarToExpression;
 import net.sf.jsqlparser.schema.Column;
+import net.sf.jsqlparser.statement.select.AllColumns;
+import net.sf.jsqlparser.statement.select.AllTableColumns;
 import net.sf.jsqlparser.statement.select.SubSelect;
 
 import java.util.List;
@@ -70,13 +123,93 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public void visit(Parenthesis parenthesis) {
+        parenthesis.getExpression().accept(this);
+    }
+
+    @Override
+    public void visit(BitwiseRightShift aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(BitwiseLeftShift aThis) {
+        notSupported(aThis);
+    }
+
+    @Override
+    public void visit(NullValue nullValue) {
+        notSupported(nullValue);
+    }
+
+    @Override
+    public void visit(Function function) {
+        notSupported(function);
+    }
+
+    @Override
+    public void visit(SignedExpression signedExpression) {
+        notSupported(signedExpression);
+    }
+
+    @Override
+    public void visit(JdbcParameter jdbcParameter) {
+        notSupported(jdbcParameter);
+    }
+
+    @Override
+    public void visit(JdbcNamedParameter jdbcNamedParameter) {
+        notSupported(jdbcNamedParameter);
+    }
+
+    @Override
+    public void visit(DoubleValue doubleValue) {
+        notSupported(doubleValue);
+    }
+
+    @Override
+    public void visit(HexValue hexValue) {
+        notSupported(hexValue);
+    }
+
+    @Override
+    public void visit(DateValue dateValue) {
+        notSupported(dateValue);
+    }
+
+    @Override
+    public void visit(TimeValue timeValue) {
+        notSupported(timeValue);
+    }
+
+    @Override
+    public void visit(TimestampValue timestampValue) {
+        notSupported(timestampValue);
+    }
+
+    @Override
     public void visit(Addition addition) {
         notSupported(addition);
     }
 
     @Override
-    public void visit(AnalyticExpression aexpr) {
-        notSupported(aexpr);
+    public void visit(Division division) {
+        notSupported(division);
+    }
+
+    @Override
+    public void visit(IntegerDivision division) {
+        notSupported(division);
+    }
+
+    @Override
+    public void visit(Multiplication multiplication) {
+        notSupported(multiplication);
+    }
+
+    @Override
+    public void visit(Subtraction subtraction) {
+        notSupported(subtraction);
     }
 
     @Override
@@ -85,13 +218,118 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
-    public void visit(AnyComparisonExpression anyComparisonExpression) {
-        notSupported(anyComparisonExpression);
+    public void visit(OrExpression orExpression) {
+        notSupported(orExpression);
+    }
+
+    @Override
+    public void visit(XorExpression orExpression) {
+        notSupported(orExpression);
     }
 
     @Override
     public void visit(Between between) {
         notSupported(between);
+    }
+
+    @Override
+    public void visit(OverlapsCondition overlapsCondition) {
+        notSupported(overlapsCondition);
+    }
+
+    @Override
+    public void visit(EqualsTo equalsTo) {
+        notSupported(equalsTo);
+    }
+
+    @Override
+    public void visit(GreaterThan greaterThan) {
+        notSupported(greaterThan);
+    }
+
+    @Override
+    public void visit(GreaterThanEquals greaterThanEquals) {
+        notSupported(greaterThanEquals);
+    }
+
+    @Override
+    public void visit(InExpression inExpression) {
+        notSupported(inExpression);
+    }
+
+    @Override
+    public void visit(FullTextSearch fullTextSearch) {
+        notSupported(fullTextSearch);
+    }
+
+    @Override
+    public void visit(IsNullExpression isNullExpression) {
+        notSupported(isNullExpression);
+    }
+
+    @Override
+    public void visit(IsBooleanExpression isBooleanExpression) {
+        notSupported(isBooleanExpression);
+    }
+
+    @Override
+    public void visit(LikeExpression likeExpression) {
+        notSupported(likeExpression);
+    }
+
+    @Override
+    public void visit(MinorThan minorThan) {
+        notSupported(minorThan);
+    }
+
+    @Override
+    public void visit(MinorThanEquals minorThanEquals) {
+        notSupported(minorThanEquals);
+    }
+
+    @Override
+    public void visit(NotEqualsTo notEqualsTo) {
+        notSupported(notEqualsTo);
+    }
+
+    @Override
+    public void visit(Column tableColumn) {
+        notSupported(tableColumn);
+    }
+
+    @Override
+    public void visit(SubSelect subSelect) {
+        notSupported(subSelect);
+    }
+
+    @Override
+    public void visit(CaseExpression caseExpression) {
+        notSupported(caseExpression);
+    }
+
+    @Override
+    public void visit(WhenClause whenClause) {
+        notSupported(whenClause);
+    }
+
+    @Override
+    public void visit(ExistsExpression existsExpression) {
+        notSupported(existsExpression);
+    }
+
+    @Override
+    public void visit(AnyComparisonExpression anyComparisonExpression) {
+        notSupported(anyComparisonExpression);
+    }
+
+    @Override
+    public void visit(Concat concat) {
+        notSupported(concat);
+    }
+
+    @Override
+    public void visit(Matches matches) {
+        notSupported(matches);
     }
 
     @Override
@@ -110,58 +348,28 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
-    public void visit(CaseExpression caseExpression) {
-        notSupported(caseExpression);
-    }
-
-    @Override
     public void visit(CastExpression cast) {
         notSupported(cast);
     }
 
     @Override
-    public void visit(Column tableColumn) {
-        notSupported(tableColumn);
+    public void visit(TryCastExpression cast) {
+        notSupported(cast);
     }
 
     @Override
-    public void visit(Concat concat) {
-        notSupported(concat);
+    public void visit(SafeCastExpression cast) {
+        notSupported(cast);
     }
 
     @Override
-    public void visit(DateTimeLiteralExpression literal) {
-        notSupported(literal);
+    public void visit(Modulo modulo) {
+        notSupported(modulo);
     }
 
     @Override
-    public void visit(DateValue dateValue) {
-        notSupported(dateValue);
-    }
-
-    @Override
-    public void visit(Division division) {
-        notSupported(division);
-    }
-
-    @Override
-    public void visit(IntegerDivision division) {
-        notSupported(division);
-    }
-
-    @Override
-    public void visit(DoubleValue doubleValue) {
-        notSupported(doubleValue);
-    }
-
-    @Override
-    public void visit(EqualsTo equalsTo) {
-        notSupported(equalsTo);
-    }
-
-    @Override
-    public void visit(ExistsExpression existsExpression) {
-        notSupported(existsExpression);
+    public void visit(AnalyticExpression aexpr) {
+        notSupported(aexpr);
     }
 
     @Override
@@ -170,58 +378,18 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
-    public void visit(Function function) {
-        notSupported(function);
-    }
-
-    @Override
-    public void visit(GreaterThan greaterThan) {
-        notSupported(greaterThan);
-    }
-
-    @Override
-    public void visit(GreaterThanEquals greaterThanEquals) {
-        notSupported(greaterThanEquals);
-    }
-
-    @Override
-    public void visit(HexValue hexValue) {
-        notSupported(hexValue);
-    }
-
-    @Override
-    public void visit(InExpression inExpression) {
-        notSupported(inExpression);
-    }
-
-    @Override
-    public void visit(FullTextSearch fullTextSearch) {
-        notSupported(fullTextSearch);
-    }
-
-    @Override
     public void visit(IntervalExpression iexpr) {
         notSupported(iexpr);
     }
 
     @Override
-    public void visit(IsNullExpression isNullExpression) {
-        notSupported(isNullExpression);
+    public void visit(OracleHierarchicalExpression oexpr) {
+        notSupported(oexpr);
     }
 
     @Override
-    public void visit(IsBooleanExpression isBooleanExpression) {
-        notSupported(isBooleanExpression);
-    }
-
-    @Override
-    public void visit(JdbcNamedParameter jdbcNamedParameter) {
-        notSupported(jdbcNamedParameter);
-    }
-
-    @Override
-    public void visit(JdbcParameter jdbcParameter) {
-        notSupported(jdbcParameter);
+    public void visit(RegExpMatchOperator rexpr) {
+        notSupported(rexpr);
     }
 
     @Override
@@ -235,38 +403,23 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
+    public void visit(RegExpMySQLOperator regExpMySQLOperator) {
+        notSupported(regExpMySQLOperator);
+    }
+
+    @Override
+    public void visit(UserVariable var) {
+        notSupported(var);
+    }
+
+    @Override
+    public void visit(NumericBind bind) {
+        notSupported(bind);
+    }
+
+    @Override
     public void visit(KeepExpression aexpr) {
         notSupported(aexpr);
-    }
-
-    @Override
-    public void visit(LikeExpression likeExpression) {
-        notSupported(likeExpression);
-    }
-
-    @Override
-    public void visit(Matches matches) {
-        notSupported(matches);
-    }
-
-    @Override
-    public void visit(MinorThan minorThan) {
-        notSupported(minorThan);
-    }
-
-    @Override
-    public void visit(MinorThanEquals minorThanEquals) {
-        notSupported(minorThanEquals);
-    }
-
-    @Override
-    public void visit(Modulo modulo) {
-        notSupported(modulo);
-    }
-
-    @Override
-    public void visit(Multiplication multiplication) {
-        notSupported(multiplication);
     }
 
     @Override
@@ -280,8 +433,28 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
     }
 
     @Override
-    public void visit(NotEqualsTo notEqualsTo) {
-        notSupported(notEqualsTo);
+    public void visit(RowConstructor rowConstructor) {
+        notSupported(rowConstructor);
+    }
+
+    @Override
+    public void visit(RowGetExpression rowGetExpression) {
+        notSupported(rowGetExpression);
+    }
+
+    @Override
+    public void visit(OracleHint hint) {
+        notSupported(hint);
+    }
+
+    @Override
+    public void visit(TimeKeyExpression timeKeyExpression) {
+        notSupported(timeKeyExpression);
+    }
+
+    @Override
+    public void visit(DateTimeLiteralExpression literal) {
+        notSupported(literal);
     }
 
     @Override
@@ -346,116 +519,35 @@ public class SupportedExpressionVisitor implements ExpressionVisitor {
 
     @Override
     public void visit(OracleNamedFunctionParameter aThis) {
-
-    }
-
-    @Override
-    public void visit(BitwiseRightShift aThis) {
         notSupported(aThis);
     }
 
     @Override
-    public void visit(BitwiseLeftShift aThis) {
-        notSupported(aThis);
+    public void visit(AllColumns allColumns) {
+        notSupported(allColumns);
     }
 
     @Override
-    public void visit(NullValue nullValue) {
-        notSupported(nullValue);
+    public void visit(AllTableColumns allTableColumns) {
+        notSupported(allTableColumns);
     }
 
     @Override
-    public void visit(NumericBind bind) {
-        notSupported(bind);
+    public void visit(AllValue allValue) {
+        notSupported(allValue);
     }
 
     @Override
-    public void visit(OracleHierarchicalExpression oexpr) {
-        notSupported(oexpr);
+    public void visit(IsDistinctExpression isDistinctExpression) {
+        notSupported(isDistinctExpression);
     }
 
     @Override
-    public void visit(OracleHint hint) {
-        notSupported(hint);
-    }
-
-    @Override
-    public void visit(OrExpression orExpression) {
-        notSupported(orExpression);
-    }
-
-    @Override
-    public void visit(XorExpression orExpression) {
-        notSupported(orExpression);
-    }
-
-    @Override
-    public void visit(Parenthesis parenthesis) {
-        notSupported(parenthesis);
-    }
-
-    @Override
-    public void visit(RegExpMatchOperator rexpr) {
-        notSupported(rexpr);
-    }
-
-    @Override
-    public void visit(RegExpMySQLOperator regExpMySQLOperator) {
-        notSupported(regExpMySQLOperator);
-    }
-
-    @Override
-    public void visit(RowConstructor rowConstructor) {
-        notSupported(rowConstructor);
-    }
-
-    @Override
-    public void visit(RowGetExpression rowGetExpression) {
-        notSupported(rowGetExpression);
-    }
-
-    @Override
-    public void visit(SignedExpression signedExpression) {
-        notSupported(signedExpression);
-    }
-
-    @Override
-    public void visit(SubSelect subSelect) {
-        notSupported(subSelect);
-    }
-
-    @Override
-    public void visit(Subtraction subtraction) {
-        notSupported(subtraction);
-    }
-
-    @Override
-    public void visit(TimeKeyExpression timeKeyExpression) {
-        notSupported(timeKeyExpression);
-    }
-
-    @Override
-    public void visit(TimestampValue timestampValue) {
-        notSupported(timestampValue);
-    }
-
-    @Override
-    public void visit(TimeValue timeValue) {
-        notSupported(timeValue);
-    }
-
-    @Override
-    public void visit(UserVariable var) {
-        notSupported(var);
-    }
-
-    @Override
-    public void visit(WhenClause whenClause) {
-        notSupported(whenClause);
+    public void visit(GeometryDistance geometryDistance) {
+        notSupported(geometryDistance);
     }
 
     private void notSupported(Expression expression) {
         throw new UnsupportedOperationException(expression.getClass().toString());
     }
-
 }
